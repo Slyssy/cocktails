@@ -9,14 +9,13 @@ let drinkCardDisplay;
 window.onload = function () {
   //  *Call functions on page load.
   getIngredientsList();
-  // searchByIngredient();
-  // lookupDrink();
+
+  searchByIngredient();
 };
 
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%
-let drinkID;
 const lookupDrink = (drinkID) => {
-  drinkID = drinkID;
+  drinkID = "15346";
 
   const options = {
     method: "GET",
@@ -62,7 +61,7 @@ const getIngredientsList = () => {
     })
     .then((data) => {
       dataArray = data.drinks;
-      // console.log("List of Ingredients", dataArray);
+
       // * Creating an array of all the ingredients.
       const arrayOfIngredients = dataArray.map(
         (ingredient) => ingredient.strIngredient1
@@ -81,6 +80,7 @@ const getIngredientsList = () => {
 const searchByIngredient = (ingredient) => {
   ingredient = document.getElementById("ingredient-list");
   const specifiedIngredient = ingredient.options[ingredient.selectedIndex].text;
+
   console.log(`The selected ingredient is: ${specifiedIngredient}`);
 
   const options = {
@@ -102,10 +102,14 @@ const searchByIngredient = (ingredient) => {
       return response.json();
     })
     .then((data) => {
+
       listOfDrinksArray = data.drinks;
       console.log("List of drinks with ingredient", listOfDrinksArray);
       drinkID = listOfDrinksArray.map((drink) => drink.idDrink);
       console.log("list of drink ID's", drinkID);
+      dataArray = data.drinks;
+      console.log("Search by Ingredients", dataArray);
+
     })
     .catch((err) => console.error(err));
 };
