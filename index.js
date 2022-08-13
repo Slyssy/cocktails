@@ -1,27 +1,27 @@
 // const { apiKey } = require('./main.js');
 // console.log(apiKey);
 let arrayOfIngredients;
-let specifiedIngredient;
+// let specifiedIngredient;
 let listOfDrinksArray;
-let individualDrinkID;
-let drinkCardDisplay;
+// let individualDrinkID;
+// let drinkCardDisplay;
 // This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
 window.onload = function () {
   //  *Call functions on page load.
   getIngredientsList();
 
-  searchByIngredient();
+  // searchByIngredient();
 };
 
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%
 const lookupDrink = (drinkID) => {
-  drinkID = "15346";
+  drinkID = '15346';
 
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-RapidAPI-Key": "0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      'X-RapidAPI-Key': '0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07',
+      'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com',
     },
   };
 
@@ -37,7 +37,7 @@ const lookupDrink = (drinkID) => {
     })
     .then((data) => {
       dataArray = data.drinks;
-      console.log("Cocktail by ID", dataArray);
+      console.log('Cocktail by ID', dataArray);
     })
     .catch((err) => console.error(err));
 };
@@ -45,14 +45,14 @@ const lookupDrink = (drinkID) => {
 // %%%%%%%%%%%%%%%%%%%%%%% Get A List of Ingredients %%%%%%%%%%%%%%%%%%%%%%%%%%
 const getIngredientsList = () => {
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-RapidAPI-Key": "0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      'X-RapidAPI-Key': '0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07',
+      'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com',
     },
   };
 
-  fetch("https://the-cocktail-db.p.rapidapi.com/list.php?i=list", options)
+  fetch('https://the-cocktail-db.p.rapidapi.com/list.php?i=list', options)
     .then((response) => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -67,7 +67,7 @@ const getIngredientsList = () => {
         (ingredient) => ingredient.strIngredient1
       );
       //* Adding arrayOfIngredients to dropdown menu
-      const ingredientDropdown = document.getElementById("ingredient-list");
+      const ingredientDropdown = document.getElementById('ingredient-list');
       arrayOfIngredients.forEach((ingredient) => {
         ingredientDropdown.innerHTML += `<option >${ingredient}</option>`;
       });
@@ -78,16 +78,16 @@ const getIngredientsList = () => {
 // %%%%%%%%%%%%%%%%%%%%%%% Search by Ingredients %%%%%%%%%%%%%%%%%%%%%%%%%%
 // getting ingredient from dropdown menu
 const searchByIngredient = (ingredient) => {
-  ingredient = document.getElementById("ingredient-list");
+  ingredient = document.getElementById('ingredient-list');
   const specifiedIngredient = ingredient.options[ingredient.selectedIndex].text;
 
   console.log(`The selected ingredient is: ${specifiedIngredient}`);
 
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-RapidAPI-Key": "0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      'X-RapidAPI-Key': '0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07',
+      'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com',
     },
   };
 
@@ -102,15 +102,12 @@ const searchByIngredient = (ingredient) => {
       return response.json();
     })
     .then((data) => {
-
+      // * Creates an array of objects that contain Drink Name, Thumb and ID.
       listOfDrinksArray = data.drinks;
-      console.log("List of drinks with ingredient", listOfDrinksArray);
+      console.log('List of drinks with ingredient', listOfDrinksArray);
+      // * Creating an array of drink ID's
       drinkID = listOfDrinksArray.map((drink) => drink.idDrink);
       console.log("list of drink ID's", drinkID);
-      dataArray = data.drinks;
-      console.log("Search by Ingredients", dataArray);
-
     })
     .catch((err) => console.error(err));
 };
-// console.log(`can I do this outside function: ${listOfDrinksArray}`);
