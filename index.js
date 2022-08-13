@@ -5,6 +5,7 @@ let arrayOfIngredients;
 let listOfDrinksArray;
 // let individualDrinkID;
 // let drinkCardDisplay;
+
 // This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
 window.onload = function () {
   //  *Call functions on page load.
@@ -15,8 +16,6 @@ window.onload = function () {
 
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%
 const lookupDrink = (drinkID) => {
-  drinkID = '15346';
-
   const options = {
     method: 'GET',
     headers: {
@@ -119,12 +118,16 @@ const searchByIngredient = (ingredient) => {
           <img
             src="${drinkThumb}"
             alt="Cocktail or Drink Image"
+            id="${drinkID}"
           />
         </figure>
         </article>
       `;
-
         drinkContainer.insertAdjacentHTML('afterbegin', html);
+        const drinkImage = document.getElementById(`${drinkID}`);
+        drinkImage.addEventListener('click', (event) => {
+          lookupDrink(drinkImage.id);
+        });
       });
     })
     .catch((err) => console.error(err));
