@@ -1,16 +1,22 @@
 // const { apiKey } = require('./main.js');
 // console.log(apiKey);
 let arrayOfIngredients;
+// let specifiedIngredient;
+let listOfDrinksArray;
+// let individualDrinkID;
+// let drinkCardDisplay;
 // This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
 window.onload = function () {
   //  *Call functions on page load.
-  // lookupDrink();
   getIngredientsList();
+
   // searchByIngredient();
 };
 
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%
-const lookupDrink = () => {
+const lookupDrink = (drinkID) => {
+  drinkID = '15346';
+
   const options = {
     method: 'GET',
     headers: {
@@ -19,7 +25,10 @@ const lookupDrink = () => {
     },
   };
 
-  fetch('https://the-cocktail-db.p.rapidapi.com/lookup.php?i=12067', options)
+  fetch(
+    `https://the-cocktail-db.p.rapidapi.com/lookup.php?i=${drinkID}`,
+    options
+  )
     .then((response) => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -52,7 +61,7 @@ const getIngredientsList = () => {
     })
     .then((data) => {
       dataArray = data.drinks;
-      console.log('List of Ingredients', dataArray);
+
       // * Creating an array of all the ingredients.
       const arrayOfIngredients = dataArray.map(
         (ingredient) => ingredient.strIngredient1
@@ -67,7 +76,13 @@ const getIngredientsList = () => {
 };
 
 // %%%%%%%%%%%%%%%%%%%%%%% Search by Ingredients %%%%%%%%%%%%%%%%%%%%%%%%%%
-const searchByIngredient = () => {
+// getting ingredient from dropdown menu
+const searchByIngredient = (ingredient) => {
+  ingredient = document.getElementById('ingredient-list');
+  const specifiedIngredient = ingredient.options[ingredient.selectedIndex].text;
+
+  console.log(`The selected ingredient is: ${specifiedIngredient}`);
+
   const options = {
     method: 'GET',
     headers: {
@@ -77,7 +92,7 @@ const searchByIngredient = () => {
   };
 
   fetch(
-    'https://the-cocktail-db.p.rapidapi.com/filter.php?i=Club%20Soda',
+    `https://the-cocktail-db.p.rapidapi.com/filter.php?i=${specifiedIngredient}`,
     options
   )
     .then((response) => {
@@ -87,8 +102,12 @@ const searchByIngredient = () => {
       return response.json();
     })
     .then((data) => {
-      dataArray = data.drinks;
-      console.log('Search Ingredients', dataArray);
+      // * Creates an array of objects that contain Drink Name, Thumb and ID.
+      listOfDrinksArray = data.drinks;
+      console.log('List of drinks with ingredient', listOfDrinksArray);
+      // * Creating an array of drink ID's
+      drinkID = listOfDrinksArray.map((drink) => drink.idDrink);
+      console.log("list of drink ID's", drinkID);
     })
     .catch((err) => console.error(err));
 };
