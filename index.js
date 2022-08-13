@@ -37,6 +37,18 @@ const lookupDrink = (drinkID) => {
     .then((data) => {
       dataArray = data.drinks;
       console.log('Cocktail by ID', dataArray);
+      const drinkObject = dataArray[0];
+      arrayOfAllIngredients = Object.keys(drinkObject).filter((drink) =>
+        drink.includes('strIngredient')
+      );
+      console.log(arrayOfAllIngredients);
+      const arrayOfIngredientsKeys = arrayOfAllIngredients.filter((el) => {
+        return drinkObject[el];
+      });
+      arrayOfIngredients = arrayOfIngredientsKeys.map(
+        (key) => drinkObject[key]
+      );
+      console.log(arrayOfIngredients);
     })
     .catch((err) => console.error(err));
 };
@@ -119,11 +131,12 @@ const searchByIngredient = (ingredient) => {
             src="${drinkThumb}"
             alt="Cocktail or Drink Image"
             id="${drinkID}"
+            class="drink-card-image"
           />
         </figure>
         </article>
       `;
-        drinkContainer.insertAdjacentHTML('afterbegin', html);
+        drinkContainer.insertAdjacentHTML('beforeend', html);
         const drinkImage = document.getElementById(`${drinkID}`);
         drinkImage.addEventListener('click', (event) => {
           lookupDrink(drinkImage.id);

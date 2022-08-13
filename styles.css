@@ -21,6 +21,7 @@
 
 body {
   font-family: 'Roboto Mono', monospace;
+  background-color: #f6f6f6;
 }
 #page-container {
   width: 90%;
@@ -75,4 +76,32 @@ ul {
 li {
   color: var(--white);
   list-style: none;
+}
+
+.drink-card-image {
+  cursor: pointer;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1400px) {
+  main {
+    max-width: 1800px;
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
