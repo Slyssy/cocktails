@@ -23,6 +23,7 @@ body {
   font-family: 'Roboto Mono', monospace;
   background-color: #f6f6f6;
 }
+
 #page-container {
   width: 90%;
   margin: 2em auto;
@@ -33,6 +34,12 @@ body {
   gap: 1em;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
 #drink-container {
   width: 90%;
   height: 450px;
