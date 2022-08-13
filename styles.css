@@ -32,7 +32,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1em;
-  background-color: var(--rosewood);
 }
 
 header {
@@ -49,20 +48,22 @@ form {
   gap: 1em;
 }
 #ingredient-list {
-  border: solid 3px rgb(11, 11, 11);
-  background-color: rgb(45, 42, 42);
-  color: var(--persimmon);
+  color: var(--rosewood);
+  background-color: #f6f6f6;
   padding: 5px 8px;
   font-size: 20px;
   border-radius: 10px;
+  padding: 10px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); */
 }
 #submit-button {
-  border: solid 3px rgb(11, 11, 11);
-  background-color: rgb(45, 42, 42);
-  color: var(--persimmon);
+  background-color: var(--rosewood);
+  color: #f6f6f6;
   padding: 5px 8px;
   font-size: 20px;
   border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 #drink-container {
   width: 90%;
