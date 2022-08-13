@@ -1,6 +1,5 @@
 // const { apiKey } = require('./main.js');
 // console.log(apiKey);
-let arrayOfIngredients;
 // let specifiedIngredient;
 let listOfDrinksArray;
 // let individualDrinkID;
@@ -35,19 +34,23 @@ const lookupDrink = (drinkID) => {
       return response.json();
     })
     .then((data) => {
+      //* Returns an array of a single object.
       dataArray = data.drinks;
       console.log('Cocktail by ID', dataArray);
+      //* Accessing array of fetched data and setting it to a variable.
       const drinkObject = dataArray[0];
-      arrayOfAllIngredients = Object.keys(drinkObject).filter((drink) =>
+      //* Create an array of keys that contain the string 'strIngredient'.
+      const arrayOfIngredientKeys = Object.keys(drinkObject).filter((drink) =>
         drink.includes('strIngredient')
       );
-      console.log(arrayOfAllIngredients);
-      const arrayOfIngredientsKeys = arrayOfAllIngredients.filter((el) => {
+      // console.log(arrayOfIngredientKeys);
+      // *Filtering array to include only keys that do not have "null" values.
+      const arrayOfNotNullKeys = arrayOfIngredientKeys.filter((el) => {
         return drinkObject[el];
       });
-      arrayOfIngredients = arrayOfIngredientsKeys.map(
-        (key) => drinkObject[key]
-      );
+      // console.log(arrayOfNotNullKeys);
+      // *Filtering not null keys and creating an array of their values.
+      arrayOfIngredients = arrayOfNotNullKeys.map((key) => drinkObject[key]);
       console.log(arrayOfIngredients);
     })
     .catch((err) => console.error(err));

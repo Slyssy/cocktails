@@ -25,7 +25,12 @@ body {
 }
 #page-container {
   width: 90%;
-  margin: 0 auto;
+  margin: 2em auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
 
 #drink-container {
