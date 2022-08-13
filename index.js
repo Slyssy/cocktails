@@ -63,6 +63,7 @@ const getIngredientsList = () => {
     },
   };
   // Leah going to write code here
+  // Sort the arrayOfIngredients array alphabetically.
   fetch("https://the-cocktail-db.p.rapidapi.com/list.php?i=list", options)
     .then((response) => {
       if (!response.ok) {
@@ -72,6 +73,18 @@ const getIngredientsList = () => {
     })
     .then((data) => {
       dataArray = data.drinks;
+      dataArray.sort((a, b) => {
+        const strIngredient1A = a.strIngredient1.toLowerCase();
+        const strIngredient1B = b.strIngredient1.toLowerCase();
+        if (strIngredient1A < strIngredient1B) {
+          return -1;
+        }
+        if (strIngredient1A > strIngredient1B) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log("this is the data.drinks:", dataArray);
 
       // * Creating an array of all the ingredients.
       const arrayOfIngredients = dataArray.map(
