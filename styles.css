@@ -20,7 +20,7 @@
 }
 
 body {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   background-color: #f6f6f6;
 }
 
@@ -150,6 +150,13 @@ li {
   color: var(--persimmon);
   font-size: 24px;
 }
+
+.modal > h3 {
+  color: var(--persimmon);
+  font-size: 18px;
+  text-decoration: underline;
+}
+
 .modal > button {
   background-color: var(--rosewood);
   border: none;
