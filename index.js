@@ -1,17 +1,22 @@
 // const { apiKey } = require('./main.js');
 // console.log(apiKey);
 let arrayOfIngredients;
+let specifiedIngredient;
+let listOfDrinksArray;
+let individualDrinkID;
+let drinkCardDisplay;
 // This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
 window.onload = function () {
   //  *Call functions on page load.
-  // lookupDrink();
   getIngredientsList();
+
   searchByIngredient();
 };
 
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%
 const lookupDrink = (drinkID) => {
   drinkID = "15346";
+
   const options = {
     method: "GET",
     headers: {
@@ -56,7 +61,7 @@ const getIngredientsList = () => {
     })
     .then((data) => {
       dataArray = data.drinks;
-      console.log("List of Ingredients", dataArray);
+
       // * Creating an array of all the ingredients.
       const arrayOfIngredients = dataArray.map(
         (ingredient) => ingredient.strIngredient1
@@ -75,7 +80,7 @@ const getIngredientsList = () => {
 const searchByIngredient = (ingredient) => {
   ingredient = document.getElementById("ingredient-list");
   const specifiedIngredient = ingredient.options[ingredient.selectedIndex].text;
-  console.log(ingredient);
+
   console.log(`The selected ingredient is: ${specifiedIngredient}`);
 
   const options = {
@@ -97,8 +102,15 @@ const searchByIngredient = (ingredient) => {
       return response.json();
     })
     .then((data) => {
+
+      listOfDrinksArray = data.drinks;
+      console.log("List of drinks with ingredient", listOfDrinksArray);
+      drinkID = listOfDrinksArray.map((drink) => drink.idDrink);
+      console.log("list of drink ID's", drinkID);
       dataArray = data.drinks;
       console.log("Search by Ingredients", dataArray);
+
     })
     .catch((err) => console.error(err));
 };
+// console.log(`can I do this outside function: ${listOfDrinksArray}`);
