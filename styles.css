@@ -40,6 +40,13 @@ header {
   align-items: center;
   gap: 1em;
 }
+form {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1em;
+}
 #drink-container {
   width: 90%;
   height: 450px;
