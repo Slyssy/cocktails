@@ -48,7 +48,73 @@ const lookupDrink = (drinkID) => {
       // console.log(arrayOfNotNullKeys);
       // *Filtering not null keys and creating an array of their values.
       arrayOfIngredients = arrayOfNotNullKeys.map((key) => drinkObject[key]);
-      console.log(arrayOfIngredients);
+      //* Create an array of keys that contain the string 'strIngredient'.
+      const arrayOfMeasurementKeys = Object.keys(drinkObject).filter((drink) =>
+        drink.includes('strMeasure')
+      );
+      // console.log(arrayOfIngredientKeys);
+      // *Filtering array to include only keys that do not have "null" values.
+      const arrayOfNotNullMeasurementKeys = arrayOfMeasurementKeys.filter(
+        (el) => {
+          return drinkObject[el];
+        }
+      );
+      // console.log(arrayOfNotNullKeys);
+      // *Filtering not null keys and creating an array of their values.
+      arrayOfMeasurements = arrayOfNotNullMeasurementKeys.map(
+        (key) => drinkObject[key]
+      );
+      // * Inserting HTML Elements in the section below.
+
+      //* Adding Modal HTML
+      const modalHTML = `
+        <div class="modal-container" id="modal-container">
+        <div class="modal">
+          <h1>${drinkObject.strDrink}</h1>
+          <figure class="modal-image">
+            <img
+              src=${drinkObject.strDrinkThumb}
+              alt="cocktail image"
+            />
+          </figure>
+          <h3>Preferred Glass Type:</h3>
+          <p>${drinkObject.strGlass}</p>
+          <h3>Ingredients</h3>
+          <ul id="drink-ingredients">
+          </ul>
+          <h4>Mixing Instructions</h4>
+          <p>
+            ${drinkObject.strInstructions}
+          </p>
+          <button id="close">Close</button>
+        </div>
+      </div>
+        `;
+
+      const pageContainer = document.getElementById('page-container');
+      pageContainer.insertAdjacentHTML('afterbegin', modalHTML);
+      //* Targeting HTML Elements Associated with Modal
+      const modalContainer = document.getElementById('modal-container');
+      const modalCloseBtn = document.getElementById('close');
+      const drinkIngredients = document.getElementById('drink-ingredients');
+
+      // *Inserting list of measurements & ingredients.
+      arrayOfIngredients.forEach((el, index) => {
+        const li = `<li>${
+          //* Making is so that drinks without measurement do not return "undefined".
+          arrayOfMeasurements[index] === undefined
+            ? (arrayOfMeasurements[index] = '')
+            : arrayOfMeasurements[index]
+        } - ${el}</li>`;
+
+        const ingredientList = document.getElementById('drink-ingredients');
+        ingredientList.insertAdjacentHTML('beforeend', li);
+      });
+
+      modalContainer.classList.add('show');
+      modalCloseBtn.addEventListener('click', () => {
+        modalContainer.classList.remove('show');
+      });
     })
     .catch((err) => console.error(err));
 };
