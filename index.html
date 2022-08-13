@@ -4,17 +4,45 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Bartender Buddy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    CSS rules to specify families
+    <link rel="stylesheet" href="./styles.css" />
     <script src="./index.js" defer></script>
   </head>
   <body>
-    <h4>Select an Ingredient</h4>
-    <form action="#" id="cocktailForm">
-      <select name="" id="ingredient-list">
-        <option>Select an Ingredient</option>
-      </select>
-      <button id="submit-button" onclick="searchByIngredient()">Submit</button>
-    </form>
-    <div id="card-container"></div>
+
+    <div id="page-container">
+      <header>
+        <h4>Select an Ingredient</h4>
+        <form action="#" id="cocktailForm">
+          <select name="" id="ingredient-list">
+            <option>Select an Ingredient</option>
+          </select>
+        </form>
+      </header>
+      <main id="drink-container">
+        <figure>
+          <figcaption>Margarita</figcaption>
+          <img
+            src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
+            alt="Cocktail or Drink Image"
+          />
+        </figure>
+        <h4>Ingredients</h4>
+        <ul>
+          <li>Tequila</li>
+          <li>Triple sec</li>
+          <li>Lime juice</li>
+          <li>salt</li>
+        </ul>
+      </main>
+    </div>
+
   </body>
 </html>
