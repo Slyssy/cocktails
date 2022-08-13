@@ -102,12 +102,30 @@ const searchByIngredient = (ingredient) => {
       return response.json();
     })
     .then((data) => {
+      const drinkContainer = document.querySelector('#cards-container');
       // * Creates an array of objects that contain Drink Name, Thumb and ID.
       listOfDrinksArray = data.drinks;
       console.log('List of drinks with ingredient', listOfDrinksArray);
-      // * Creating an array of drink ID's
-      drinkID = listOfDrinksArray.map((drink) => drink.idDrink);
-      console.log("list of drink ID's", drinkID);
+      // // * Creating an array of drink ID's
+      drinkContainer.innerHTML = '';
+      drinks = listOfDrinksArray.map((drink) => {
+        const drinkName = drink.strDrink;
+        const drinkID = drink.idDrink;
+        const drinkThumb = drink.strDrinkThumb;
+        const html = `
+        <article id="drink-container">
+      <figure>
+          <figcaption>${drinkName}</figcaption>
+          <img
+            src="${drinkThumb}"
+            alt="Cocktail or Drink Image"
+          />
+        </figure>
+        </article>
+      `;
+
+        drinkContainer.insertAdjacentHTML('afterbegin', html);
+      });
     })
     .catch((err) => console.error(err));
 };

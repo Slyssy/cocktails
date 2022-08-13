@@ -11,12 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-    CSS rules to specify families
     <link rel="stylesheet" href="./styles.css" />
     <script src="./index.js" defer></script>
   </head>
   <body>
-
     <div id="page-container">
       <header>
         <h4>Select an Ingredient</h4>
@@ -24,25 +22,12 @@
           <select name="" id="ingredient-list">
             <option>Select an Ingredient</option>
           </select>
+          <button id="submit-button" onclick="searchByIngredient()">
+            Submit
+          </button>
         </form>
       </header>
-      <main id="drink-container">
-        <figure>
-          <figcaption>Margarita</figcaption>
-          <img
-            src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
-            alt="Cocktail or Drink Image"
-          />
-        </figure>
-        <h4>Ingredients</h4>
-        <ul>
-          <li>Tequila</li>
-          <li>Triple sec</li>
-          <li>Lime juice</li>
-          <li>salt</li>
-        </ul>
-      </main>
+      <main id="cards-container"></main>
     </div>
-
   </body>
 </html>
