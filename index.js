@@ -89,28 +89,37 @@ const lookupDrink = (drinkID) => {
       </div>
         `;
 
+      // * Setting variables to  work with the HTML created above and add a
+      // *  modal to display individual drink details.
       const pageContainer = document.getElementById('page-container');
       pageContainer.insertAdjacentHTML('afterbegin', modalHTML);
       //* Targeting HTML Elements Associated with Modal
       const modalContainer = document.getElementById('modal-container');
       const modalCloseBtn = document.getElementById('close');
-      const drinkIngredients = document.getElementById('drink-ingredients');
       const header = document.querySelector('header');
       const main = document.querySelector('main');
 
-      // *Inserting list of measurements & ingredients.
+      // *Looping through the arrayOfIngredients to insert a list of measurements & ingredients.
       arrayOfIngredients.forEach((el, index) => {
         const li = `<li>${
-          //* Making is so that drinks without measurement do not return "undefined".
+          //* Making is so that drinks without measurement do not return
+          //* "undefined".
+          // * Using the index to count each loop and use that number to index
+          // * the array of measurements to return the corresponding  measurement value.
           arrayOfMeasurements[index] === undefined
             ? (arrayOfMeasurements[index] = '')
             : arrayOfMeasurements[index]
         } - ${el}</li>`;
 
+        // * Inserting the list elements created above.
         const ingredientList = document.getElementById('drink-ingredients');
         ingredientList.insertAdjacentHTML('beforeend', li);
       });
 
+      // * Below is the functionality that will open and close the modal. Modal
+      // *  is opened when the lookupDrink() function is triggered when the
+      // *  drink image is selected, and the modal is hidden when the close
+      // *  button is clicked.
       modalContainer.classList.add('show');
       main.classList.add('hide');
       header.classList.add('hide');
@@ -133,7 +142,7 @@ const getIngredientsList = () => {
     },
   };
   // Leah going to write code here
-  // Sort the arrayOfIngredients array alphabetically.
+
   fetch('https://the-cocktail-db.p.rapidapi.com/list.php?i=list', options)
     .then((response) => {
       if (!response.ok) {
@@ -143,6 +152,7 @@ const getIngredientsList = () => {
     })
     .then((data) => {
       dataArray = data.drinks;
+      //* Sort the arrayOfIngredients array alphabetically.
       dataArray.sort((a, b) => {
         const strIngredient1A = a.strIngredient1.toLowerCase();
         const strIngredient1B = b.strIngredient1.toLowerCase();
@@ -154,7 +164,7 @@ const getIngredientsList = () => {
         }
         return 0;
       });
-      console.log('this is the data.drinks:', dataArray);
+      // console.log('this is the data.drinks:', dataArray);
 
       // * Creating an array of all the ingredients.
       const arrayOfIngredients = dataArray.map(
@@ -170,12 +180,13 @@ const getIngredientsList = () => {
 };
 
 // %%%%%%%%%%%%%%%%%%%%%%% Search by Ingredients %%%%%%%%%%%%%%%%%%%%%%%%%%
-// getting ingredient from dropdown menu
+// * Getting ingredient from dropdown menu
 const searchByIngredient = (ingredient) => {
   ingredient = document.getElementById('ingredient-list');
+  // * Setting variable to store the value selected from the dropdown menu.
   const specifiedIngredient = ingredient.options[ingredient.selectedIndex].text;
 
-  console.log(`The selected ingredient is: ${specifiedIngredient}`);
+  // console.log(`The selected ingredient is: ${specifiedIngredient}`);
 
   const options = {
     method: 'GET',
@@ -199,9 +210,10 @@ const searchByIngredient = (ingredient) => {
       const drinkContainer = document.querySelector('#cards-container');
       // * Creates an array of objects that contain Drink Name, Thumb and ID.
       listOfDrinksArray = data.drinks;
-      console.log('List of drinks with ingredient', listOfDrinksArray);
-      // // * Creating an array of drink ID's
+      // console.log('List of drinks with ingredient', listOfDrinksArray);
+      // * Clearing the drink container before new HTML is added.
       drinkContainer.innerHTML = '';
+      // * Creating an array of drink ID's
       drinks = listOfDrinksArray.map((drink) => {
         const drinkName = drink.strDrink;
         const drinkID = drink.idDrink;
@@ -220,8 +232,11 @@ const searchByIngredient = (ingredient) => {
         </article>
       `;
         drinkContainer.insertAdjacentHTML('beforeend', html);
+        // * Adding event listener to each of the drink images. This will call
+        // * the lookUpDrink() function
         const drinkImage = document.getElementById(`${drinkID}`);
         drinkImage.addEventListener('click', (event) => {
+          // * Calling the lookupDrink() function to get the drink's full details.
           lookupDrink(drinkImage.id);
         });
       });
