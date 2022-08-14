@@ -15,3 +15,7 @@
 1. Select which ingredient you'd like to work with from the dropdown selector.
 2. Select the submit button to get all the drinks that use that ingredient.
 3. Simply click the image of the drink you'd like from the available cards and get your drink recipe.
+
+### Background Image
+
+Photo 36802925 / Bar Scene © Olivier Le Queinec | Dreamstime.com

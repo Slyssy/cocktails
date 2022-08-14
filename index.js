@@ -13,10 +13,10 @@ window.onload = function () {
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%
 const lookupDrink = (drinkID) => {
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-RapidAPI-Key": "0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      'X-RapidAPI-Key': '0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07',
+      'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com',
     },
   };
 
@@ -33,12 +33,12 @@ const lookupDrink = (drinkID) => {
     .then((data) => {
       //* Returns an array of a single object.
       dataArray = data.drinks;
-      console.log("Cocktail by ID", dataArray);
+      console.log('Cocktail by ID', dataArray);
       //* Accessing array of fetched data and setting it to a variable.
       const drinkObject = dataArray[0];
       //* Create an array of keys that contain the string 'strIngredient'.
       const arrayOfIngredientKeys = Object.keys(drinkObject).filter((drink) =>
-        drink.includes("strIngredient")
+        drink.includes('strIngredient')
       );
       // console.log(arrayOfIngredientKeys);
       // *Filtering array to include only keys that do not have "null" values.
@@ -122,15 +122,15 @@ const lookupDrink = (drinkID) => {
 // %%%%%%%%%%%%%%%%%%%%%%% Get A List of Ingredients %%%%%%%%%%%%%%%%%%%%%%%%%%
 const getIngredientsList = () => {
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-RapidAPI-Key": "0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      'X-RapidAPI-Key': '0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07',
+      'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com',
     },
   };
   // Leah going to write code here
   // Sort the arrayOfIngredients array alphabetically.
-  fetch("https://the-cocktail-db.p.rapidapi.com/list.php?i=list", options)
+  fetch('https://the-cocktail-db.p.rapidapi.com/list.php?i=list', options)
     .then((response) => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -150,14 +150,14 @@ const getIngredientsList = () => {
         }
         return 0;
       });
-      console.log("this is the data.drinks:", dataArray);
+      console.log('this is the data.drinks:', dataArray);
 
       // * Creating an array of all the ingredients.
       const arrayOfIngredients = dataArray.map(
         (ingredient) => ingredient.strIngredient1
       );
       //* Adding arrayOfIngredients to dropdown menu
-      const ingredientDropdown = document.getElementById("ingredient-list");
+      const ingredientDropdown = document.getElementById('ingredient-list');
       arrayOfIngredients.forEach((ingredient) => {
         ingredientDropdown.innerHTML += `<option >${ingredient}</option>`;
       });
@@ -168,16 +168,16 @@ const getIngredientsList = () => {
 // %%%%%%%%%%%%%%%%%%%%%%% Search by Ingredients %%%%%%%%%%%%%%%%%%%%%%%%%%
 // getting ingredient from dropdown menu
 const searchByIngredient = (ingredient) => {
-  ingredient = document.getElementById("ingredient-list");
+  ingredient = document.getElementById('ingredient-list');
   const specifiedIngredient = ingredient.options[ingredient.selectedIndex].text;
 
   console.log(`The selected ingredient is: ${specifiedIngredient}`);
 
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-RapidAPI-Key": "0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      'X-RapidAPI-Key': '0655aa903cmsh48b384669412764p17bd8fjsn60d6419ebf07',
+      'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com',
     },
   };
 
@@ -192,12 +192,12 @@ const searchByIngredient = (ingredient) => {
       return response.json();
     })
     .then((data) => {
-      const drinkContainer = document.querySelector("#cards-container");
+      const drinkContainer = document.querySelector('#cards-container');
       // * Creates an array of objects that contain Drink Name, Thumb and ID.
       listOfDrinksArray = data.drinks;
-      console.log("List of drinks with ingredient", listOfDrinksArray);
+      console.log('List of drinks with ingredient', listOfDrinksArray);
       // // * Creating an array of drink ID's
-      drinkContainer.innerHTML = "";
+      drinkContainer.innerHTML = '';
       drinks = listOfDrinksArray.map((drink) => {
         const drinkName = drink.strDrink;
         const drinkID = drink.idDrink;
@@ -215,9 +215,9 @@ const searchByIngredient = (ingredient) => {
         </figure>
         </article>
       `;
-        drinkContainer.insertAdjacentHTML("beforeend", html);
+        drinkContainer.insertAdjacentHTML('beforeend', html);
         const drinkImage = document.getElementById(`${drinkID}`);
-        drinkImage.addEventListener("click", (event) => {
+        drinkImage.addEventListener('click', (event) => {
           lookupDrink(drinkImage.id);
         });
       });
