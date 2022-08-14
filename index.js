@@ -97,6 +97,8 @@ const lookupDrink = (drinkID) => {
       const modalContainer = document.getElementById('modal-container');
       const modalCloseBtn = document.getElementById('close');
       const drinkIngredients = document.getElementById('drink-ingredients');
+      const header = document.querySelector('header');
+      const main = document.querySelector('main');
 
       // *Inserting list of measurements & ingredients.
       arrayOfIngredients.forEach((el, index) => {
@@ -112,8 +114,12 @@ const lookupDrink = (drinkID) => {
       });
 
       modalContainer.classList.add('show');
+      main.classList.add('hide');
+      header.classList.add('hide');
       modalCloseBtn.addEventListener('click', () => {
         modalContainer.classList.remove('show');
+        main.classList.remove('hide');
+        header.classList.remove('hide');
       });
     })
     .catch((err) => console.error(err));
