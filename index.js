@@ -6,8 +6,6 @@ let listOfDrinksArray;
 window.onload = function () {
   //  *Call functions on page load.
   getIngredientsList();
-
-  // searchByIngredient();
 };
 
 // %%%%%%%%%%%%%%%%%%%%%% Lookup cocktail by cocktail ID %%%%%%%%%%%%%%%%%%%%%%

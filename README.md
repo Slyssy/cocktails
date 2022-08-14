@@ -5,7 +5,7 @@
 ### Technologies
 
 - JavaScript
-  - Fetch API (Multiple Fetch Calls from Rapid API's "The Cocktail DB)
+  - Fetch API (Multiple Fetch Calls from Rapid API's **"The Cocktail DB".**)
   - InsertAdjacentHTML to build HTML elements in JavaScript file.
 - HTML
 - CSS
