@@ -1,8 +1,6 @@
-// const { apiKey } = require('./main.js');
-// console.log(apiKey);
 let listOfDrinksArray;
 
-// This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
+// * This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
 window.onload = function () {
   //  *Call functions on page load.
   getIngredientsList();
@@ -31,7 +29,7 @@ const lookupDrink = (drinkID) => {
     .then((data) => {
       //* Returns an array of a single object.
       dataArray = data.drinks;
-      console.log('Cocktail by ID', dataArray);
+      // console.log('Cocktail by ID', dataArray);
       //* Accessing array of fetched data and setting it to a variable.
       const drinkObject = dataArray[0];
       //* Create an array of keys that contain the string 'strIngredient'.
@@ -210,7 +208,7 @@ const searchByIngredient = (ingredient) => {
       const drinkContainer = document.querySelector('#cards-container');
       // * Creates an array of objects that contain Drink Name, Thumb and ID.
       listOfDrinksArray = data.drinks;
-      // console.log('List of drinks with ingredient', listOfDrinksArray);
+      console.log('List of drinks with ingredient', listOfDrinksArray);
       // * Clearing the drink container before new HTML is added.
       drinkContainer.innerHTML = '';
       // * Creating an array of drink ID's
